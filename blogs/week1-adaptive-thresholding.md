@@ -1,4 +1,0 @@
-**Adaptive Thresholding**
-========================
-
-
