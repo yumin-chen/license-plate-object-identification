@@ -2,7 +2,11 @@
 ========================
 <sup>*This is a blog entry from [License Plate Object Identification Blogs](./README.md).*</sup>
 
-In this week, different types of thresholding is implemented as a method of segmentation.
+In this week, different types of thresholding is implemented as a method of segmentation.  
+
+| Original | Global Thresholding | Adaptive Thresholding |
+| :---: |:---:| :---:|
+| ![Original](./img/week1-original.jpg) | ![Global Thresholding](./img/week2-global-thresholding.jpg) | ![Adaptive Thresholding](./img/week2-adaptive-thresholding.jpg) |  
 
 Global thresholding is an unsophisicated segmentation technique that can seperate between the two peaks in the image. Previously, this was implemented using grayscale image. `blackWhite = double(contrastStretched > threshold);` This would result in a black and white output (See: [main.m](https://github.com/CharmySoft/license-plate-object-identification/blob/0eef0f0a49d873441912e2c860541058049a29ac/main.m#L34)).  
 
@@ -23,7 +27,7 @@ end
 ```
 The threshold is compared with the mean of the red, green, and blue values of a pixel.
 
-On the other hand, [Adaptive thresholding][1] is a form of thresholding that takes into account spatial variations in illumination. 
+On the other hand, [Adaptive thresholding][1] is a form of thresholding that takes into account spatial variations in illumination.
 
 ```matlab
 adaptiveThresholding = image;
@@ -41,12 +45,6 @@ for x = half + 1:width - half
 end
 ```
 The code above uses the cookie-cutter technique to scan through the entire image using a tiny 7x7 area *cookie* to decide its threshold, and thus the name adaptive thresholding.
-
-Results:
-
-| Original | Global Thresholding | Adaptive Thresholding |
-| :---: |:---:| :---:|
-| ![Original](./img/week1-original.jpg) | ![Global Thresholding](./img/week2-global-thresholding.jpg) | ![Adaptive Thresholding](./img/week2-adaptive-thresholding.jpg) |
 
 
 References
