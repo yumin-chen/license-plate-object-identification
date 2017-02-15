@@ -6,7 +6,7 @@ Weekly Progress Blogs
 ------------------------
 All the progress and contribution to this project are recorded on the weekly progress blogs.
 
-[Week 1: Contrast Streching](./week1.md)
+[Week 1: Contrast Stretching](./week1.md)
 
 [Week 2: Thresholding](./week2.md)
 
