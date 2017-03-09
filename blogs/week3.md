@@ -47,6 +47,13 @@ The result is a black and white image with very thick lines around the rectangul
 
 It was discovered that the lines could be made thicker if I applied a Gaussian filter to the image before applying Sobal.
 
-| Original | Global Thresholding | Adaptive Thresholding |
+| Adaptive Thresholding | Sobal without Gaussian | Sobal with Gaussian|
 | :---: |:---:| :---:|
 | ![Global Thresholding](./img/week2-adaptive-thresholding.jpg) | ![Sobal without Gaussian](./img/week3-sobel-without-gaus.jpg) |![Sobal with Gaussian](./img/week3-sobel-with-gaus.jpg) |
+
+References
+------------------------
+* [Sobel Edge Detector by R Fisher et al, Edinburgh University][1]  
+
+[1]: http://homepages.inf.ed.ac.uk/rbf/HIPR2/sobel.htm "Sobel Edge Detector"
+<br>
