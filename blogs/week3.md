@@ -46,4 +46,4 @@ It was discovered that the lines could be made thicker if I applied a Gausian fi
 
 | Original | Global Thresholding | Adaptive Thresholding |
 | :---: |:---:| :---:|
-| ![Original](./img/week1-original.jpg) | ![Global Thresholding](./img/week2-global-thresholding.jpg) | ![Adaptive Thresholding](./img/week2-adaptive-thresholding.jpg) |  
+| ![Original](./img/week2-adaptive-thresholding.jpg) | ![Global Thresholding](./img/week3-sobel-without-gaus.jpg) | ![Adaptive Thresholding](./img/week2-adaptive-thresholding.jpg) |  
