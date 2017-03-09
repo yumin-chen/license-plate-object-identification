@@ -35,7 +35,7 @@ gLowerBound = max(gMin, (gMax + gMin) / 2 - gStd * 3);
 gUpperbound = min(gMax, (gMax + gMin) / 2 + gStd * 3);
 contrastStretched = (image - gLowerBound) / (gUpperbound - gLowerBound);
 % Show contrast streched image
-figure, imshow(contrastStretched), title('Contrast Stretched');
+% figure, imshow(contrastStretched), title('Contrast Stretched');
 
 
 % ------------------------
@@ -53,7 +53,7 @@ for x = 1:width
     end
 end
 % Show global thresholding reconstructed image
-figure, imshow(globalThresholding), title('Global Thresholding');
+% figure, imshow(globalThresholding), title('Global Thresholding');
 
 
 % ------------------------
@@ -73,7 +73,33 @@ for x = half + 1:width - half
     end
 end
 % Show adaptive thresholding reconstructed image
-figure, imshow(adaptiveThresholding), title('Adaptive Thresholding');
+% figure, imshow(adaptiveThresholding), title('Adaptive Thresholding');
 
+% Apply gausian filter to the thresholded image
+adaptiveThresholding = imgaussfilt(adaptiveThresholding, 2);
+% This is the sobel filter kernal
+sobelX = [-1 0 1;
+         -2 0 1;
+         -1 0 1]/4;
+     
+sobelY = [-1 -2 -1;
+         0 0 0;
+         1 2 1]/4;
 
+% convert our thresholding image to greyscale
+adaptiveThresholdingGray = rgb2gray(adaptiveThresholding);
 
+%Apply sobel filter to emphasize lines on the X and Y axis
+edgeDetectionX = conv2(adaptiveThresholdingGray, sobelX);
+edgeDetectionY = conv2(adaptiveThresholdingGray, sobelY);
+
+% Get the gradient magnitude of the image using use Pythagorus Thoerem
+magnitude = sqrt(edgeDetectionX.^2 + edgeDetectionY.^2);
+edgeDetection = (magnitude - min(magnitude(:)))/max(magnitude(:)) - min(magnitude(:));
+
+% Using the threshold of 0.2 to seperate lines of high 
+% (after adaptive thresholding)
+edgeDetection = edgeDetection > 0.2;
+edgeDetection = ~edgeDetection;
+
+imshow(edgeDetection);
