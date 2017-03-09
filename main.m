@@ -77,6 +77,7 @@ end
 
 % Apply gausian filter to the thresholded image
 adaptiveThresholding = imgaussfilt(adaptiveThresholding, 2);
+
 % This is the sobel filter kernal
 sobelX = [-1 0 1;
          -2 0 1;
