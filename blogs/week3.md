@@ -25,6 +25,9 @@ sobelY = [-1 -2 -1;
 Using the formula of Pythagorus Thoerem, we can get the gradient magnitude of our image. We then use a threshold of 0.2 in order to seperate the lines we detected using Sobal, from the image that we just convoluded. 
 
 ```
+% Apply gausian filter to the thresholded image
+adaptiveThresholding = imgaussfilt(adaptiveThresholding, 2);
+
 %Apply sobel filter to emphasize lines on the X and Y axis
 edgeDetectionX = conv2(adaptiveThresholdingGray, sobelX);
 edgeDetectionY = conv2(adaptiveThresholdingGray, sobelY);
@@ -42,8 +45,8 @@ edgeDetection = ~edgeDetection;
 The result is a black and white image with very thick lines around the rectangular licence plate, where originally the lines were broken at some of the corners. The image is then inverted.
 
 
-It was discovered that the lines could be made thicker if I applied a Gausian filter to the image before applying Sobal.
+It was discovered that the lines could be made thicker if I applied a Gaussian filter to the image before applying Sobal.
 
 | Original | Global Thresholding | Adaptive Thresholding |
 | :---: |:---:| :---:|
-| ![Original](./img/week2-adaptive-thresholding.jpg) | ![Global Thresholding](./img/week3-sobel-without-gaus.jpg) | ![Adaptive Thresholding](./img/week2-adaptive-thresholding.jpg) |  
+| ![Global Thresholding](./img/week2-adaptive-thresholding.jpg) | ![Sobal without Gaussian](./img/week3-sobel-without-gaus.jpg) | ![Sobal with Gaussian](./img/week3-sobel-without-gaus.jpg) |  
