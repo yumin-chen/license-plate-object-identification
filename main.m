@@ -5,12 +5,26 @@
 %
 % Copyright (C): Yumin Chen & Paul Sheehan
 %
+% ------------------------
 % Introduction
 % ------------------------
 % This project aims to find (and isolate by masking) the registration plate
 % in an image. Algorithms will be demonstrated on a specific image but they
 % are designed in a general way so they will work on similar images. All 
 % designs aim to be as automated as possible. 
+%
+% ------------------------
+% Algorithm
+% ------------------------
+% The basic method for extracting the license plate region can be described
+% by the following steps.
+% 1. Input of the original image
+% 2. Normalization (Contrast Stretching)
+% 3. Conversion to HSV color space
+% 4. Identification of the blue vertical band to the left of the plate
+% 5. Edge detection
+% 6. Morphological operation
+% 7. Finding the license plate region
 % -------------------------------------------------------------------------
 
 % Clear and clean enviroment
