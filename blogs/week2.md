@@ -56,4 +56,4 @@ References
 
 ------------------------
 Previous: [Week 1: Contrast Streching](./week1.md)  
-Next: [Week 3: ...](./week3.md)
+Next: [Week 3: Edge Detection](./week3.md)
