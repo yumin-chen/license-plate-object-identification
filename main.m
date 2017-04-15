@@ -27,70 +27,108 @@
 % 7. Finding the license plate region
 % -------------------------------------------------------------------------
 
+
+% ------------------------
+% Main
+% ------------------------
+function main
+cleanEverything();
+
+% Read the originial registration plate image
+image = im2double(imread('Reg.jpg'));
+
+% Normalize
+normalized = normalize(image);
+
+% Global Thresholding
+gThreshed = globalThreshold(normalized, mean(image(:)));
+
+% Adaptive Thresholding
+aThreshed = adaptiveThreshold(normalized);
+
+% Edge Detect
+edgeDetected = edgeDetect(aThreshed);
+
+
+% Show images
+figure, imshow(normalized), title('Contrast Stretched');
+figure, imshow(gThreshed), title('Global Thresholding');
+figure, imshow(aThreshed), title('Adaptive Thresholding');
+figure, imshow(edgeDetected), title('Edge Detection');
+end
+
+
+% ------------------------
+% Clean everything
+% ------------------------
+function cleanEverything
 % Clear and clean enviroment
 clc;        % Clear command line
 clear all;  % Clear all variables
 close all;  % Close all sub-windows
+end
 
-% Read image
-image = im2double(imread('Reg.jpg'));
+
+% ------------------------
+% Normalize (Stretch contrast)
+% ------------------------
+function output = normalize(image)
 gray = rgb2gray(image); 
-[height, width, depth] = size(image);
-
-
-% ------------------------
-% Stretch contrast
-% ------------------------
 gMin = min(gray(:));
 gMax = max(gray(:));
 gStd = std(gray(:));
 % Apply statistics three-sigma rule to bound to 99.73% of data
 gLowerBound = max(gMin, (gMax + gMin) / 2 - gStd * 3);
 gUpperbound = min(gMax, (gMax + gMin) / 2 + gStd * 3);
-contrastStretched = (image - gLowerBound) / (gUpperbound - gLowerBound);
-% Show contrast streched image
-% figure, imshow(contrastStretched), title('Contrast Stretched');
+output = (image - gLowerBound) / (gUpperbound - gLowerBound);
+end
 
 
 % ------------------------
 % Global thresholding
 % ------------------------
-threshold = mean(contrastStretched(:));
-globalThresholding = image;
+function output = globalThreshold(image, threshold)
+output = image;
+[height, width, ~] = size(image);
 % Loop through each pixel for global thresholding
 for x = 1:width
     for y = 1: height
-        if mean(contrastStretched(y, x, :)) > threshold
+        if mean(image(y, x, :)) > threshold
             % Wipe out the pixel if larger than threshold
-            globalThresholding(y, x, :) = 1;
+            output(y, x, :) = 1;
         end            
     end
 end
-% Show global thresholding reconstructed image
-% figure, imshow(globalThresholding), title('Global Thresholding');
+end
 
 
 % ------------------------
 % Adaptive thresholding
 % ------------------------
-adaptiveThresholding = image;
+function output = adaptiveThreshold(image)
+output = image;
+[height, width, ~] = size(image);
 half = 3;
 % Loop through the image to apply threshold to each pixel
 for x = half + 1:width - half
     for y = half + 1: height - half
-        area = contrastStretched(y-half:y+half, x-half:x+half, :);
+        area = image(y-half:y+half, x-half:x+half, :);
         threshold = mean(area(:)) - 0.05;
-        if mean(contrastStretched(y, x, :)) > threshold
+        if mean(image(y, x, :)) > threshold
             % Wipe out the pixel if larger than threshold
-            adaptiveThresholding(y, x, :) = 1;
-        end            
+            output(y, x, :) = 1;
+        end
     end
 end
-% Show adaptive thresholding reconstructed image
-% figure, imshow(adaptiveThresholding), title('Adaptive Thresholding');
+end
 
+
+% ------------------------
+% Edge Detection
+% ------------------------
+function output = edgeDetect(image)
 % Apply gausian filter to the thresholded image
-adaptiveThresholding = imgaussfilt(adaptiveThresholding, 2);
+blurred = imgaussfilt(image, 2);
 
 % This is the sobel filter kernal
 sobelX = [-1 0 1;
@@ -101,12 +139,12 @@ sobelY = [-1 -2 -1;
          0 0 0;
          1 2 1]/4;
 
-% convert our thresholding image to greyscale
-adaptiveThresholdingGray = rgb2gray(adaptiveThresholding);
+% convert blurred image to greyscale
+blurredGray = rgb2gray(blurred);
 
 %Apply sobel filter to emphasize lines on the X and Y axis
-edgeDetectionX = conv2(adaptiveThresholdingGray, sobelX);
-edgeDetectionY = conv2(adaptiveThresholdingGray, sobelY);
+edgeDetectionX = conv2(blurredGray, sobelX);
+edgeDetectionY = conv2(blurredGray, sobelY);
 
 % Get the gradient magnitude of the image using use Pythagorus Thoerem
 magnitude = sqrt(edgeDetectionX.^2 + edgeDetectionY.^2);
@@ -115,6 +153,5 @@ edgeDetection = (magnitude - min(magnitude(:)))/max(magnitude(:)) - min(magnitud
 % Using the threshold of 0.2 to seperate lines of high 
 % (after adaptive thresholding)
 edgeDetection = edgeDetection > 0.2;
-edgeDetection = ~edgeDetection;
-
-imshow(edgeDetection);
+output = ~edgeDetection;
+end
