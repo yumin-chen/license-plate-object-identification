@@ -37,7 +37,7 @@ cleanEverything();
 % Read the originial registration plate image
 image = im2double(imread('Reg.jpg'));
 
-% Normalize
+% Normalization
 normalized = normalize(image);
 
 % Global Thresholding
@@ -46,8 +46,11 @@ gThreshed = globalThreshold(normalized, mean(image(:)));
 % Adaptive Thresholding
 aThreshed = adaptiveThreshold(normalized);
 
-% Edge Detect
+% Edge Detection
 edgeDetected = edgeDetect(aThreshed);
+
+% Color Segmentation
+colorSegmented = colorSegment(normalized);
 
 
 % Show images
@@ -55,6 +58,7 @@ figure, imshow(normalized), title('Contrast Stretched');
 figure, imshow(gThreshed), title('Global Thresholding');
 figure, imshow(aThreshed), title('Adaptive Thresholding');
 figure, imshow(edgeDetected), title('Edge Detection');
+figure, imshow(colorSegmented), title('Color Segmentation');
 end
 
 
@@ -70,7 +74,7 @@ end
 
 
 % ------------------------
-% Normalize (Stretch contrast)
+% Normalization (Contrast Stretching)
 % ------------------------
 function output = normalize(image)
 gray = rgb2gray(image); 
@@ -85,7 +89,7 @@ end
 
 
 % ------------------------
-% Global thresholding
+% Global Thresholding
 % ------------------------
 function output = globalThreshold(image, threshold)
 output = image;
@@ -103,7 +107,7 @@ end
 
 
 % ------------------------
-% Adaptive thresholding
+% Adaptive Thresholding
 % ------------------------
 function output = adaptiveThreshold(image)
 output = image;
@@ -154,4 +158,25 @@ edgeDetection = (magnitude - min(magnitude(:)))/max(magnitude(:)) - min(magnitud
 % (after adaptive thresholding)
 edgeDetection = edgeDetection > 0.2;
 output = ~edgeDetection;
+end
+
+
+% ------------------------
+% Color Segmentation
+% ------------------------
+function output = colorSegment(image)
+% Convert to HSV color space 
+imageHsv = rgb2hsv(image);
+h = imageHsv(:, :, 1);
+s = imageHsv(:, :, 2);
+v = imageHsv(:, :, 3);
+
+% Segment using color
+roi = ((h > 0.5) & (h < 0.833)) & (s > 0.5) & (v > 0.5);
+
+% Restore to RGB colored image
+output = image;
+for i = 1:3
+    output(:, :, i) = roi .* image(:, :, i);
+end
 end
