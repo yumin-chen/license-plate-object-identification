@@ -103,4 +103,17 @@ edgeDetection = (magnitude - min(magnitude(:)))/max(magnitude(:)) - min(magnitud
 edgeDetection = edgeDetection > 0.2;
 edgeDetection = ~edgeDetection;
 
-imshow(edgeDetection);
+angle = atan(edgeDetectionX./edgeDetectionY);
+canny = edge(edgeDetection,'Canny');
+
+canny_angles = ones(size(image));
+canny_angles(canny) = angle(canny);
+
+angle_tolerance = 30/180*pi;
+target_angle = 90;
+
+A_target_angle = canny_angles >= target_angle*pi/180 - angle_tolerance & ...
+    canny_angles<= target_angle*pi/180 + angle_tolerance;
+
+% A_target_angle = edgeDetection-A_target_angle;
+imshow(canny);
