@@ -45,18 +45,8 @@ edgeDetected = edge(rgb2gray(normalized), 'Canny');
 % Color Segmentation
 colorSegmented = colorSegment(normalized);
 
-% Combine blue vertical band with edges
-roi = colorSegmented | edgeDetected;
-roi = bwareafilt(roi, 1, 'largest');
-
-% Fill the enclosed area
-roi = imfill(roi, 'holes');
-
-% Restore to RGB colored image
-output = image;
-for i = 1:3
-    output(:, :, i) = roi .* image(:, :, i);
-end
+% Morphological operation 
+output = morph(normalized, colorSegmented | edgeDetected);
 
 % Show images
 subplot(1,2,1), imshow(image), title('Original');
@@ -104,9 +94,27 @@ v = imageHsv(:, :, 3);
 roi = ((h > 0.5) & (h < 0.833)) & (s > 0.5) & (v > 0.5);
 
 % Remove smaller components 
-% roi = bwareaopen(roi, floor((width/20) * (height/20)));
 roi = bwareafilt(roi, 1, 'largest');
 
 % Fill the enclosed area
 output = imfill(roi, 'holes');
 end
+
+
+% ------------------------
+% Morphological Operation
+% ------------------------
+function output = morph(image, roi)
+% Filter out rubbish
+roi = bwareafilt(roi, 1, 'largest');
+
+% Fill the enclosed area
+roi = imfill(roi, 'holes');
+
+% Restore to RGB colored image
+output = image;
+for i = 1:3
+    output(:, :, i) = roi .* image(:, :, i);
+end
+end
+
