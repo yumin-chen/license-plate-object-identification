@@ -23,14 +23,8 @@ end
 ```
          
 
-
-References
-------------------------
-* [Sobel Edge Detector by R Fisher et al, Edinburgh University][1]  
-
-[1]: http://homepages.inf.ed.ac.uk/rbf/HIPR2/sobel.htm "Sobel Edge Detector"
 <br>
 
 ------------------------
 Previous: [Week 3: Edge Detection](./week3.md)  
-Next: [Week 5: ...s](./week5.md)
+Next: [Week 5: Finishing Up](./week5.md)

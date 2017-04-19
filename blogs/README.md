@@ -14,4 +14,4 @@ All the progress and contribution to this project are recorded on the weekly pro
 
 [Week 4: Color Segmentation](./week4.md)
 
-[Week 5: ...](./week5.md)
+[Week 5: Finishing Up](./week5.md)
