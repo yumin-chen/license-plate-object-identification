@@ -52,6 +52,16 @@ edgeDetected = edgeDetect(aThreshed);
 % Color Segmentation
 colorSegmented = colorSegment(normalized);
 
+roi = colorSegmented | edgeDetected;
+roi = bwareafilt(roi, 1, 'largest');
+% Fill the enclosed area
+roi = imfill(roi, 'holes');
+
+% Restore to RGB colored image
+output = image;
+for i = 1:3
+    output(:, :, i) = roi .* image(:, :, i);
+end
 
 % Show images
 figure, imshow(normalized), title('Contrast Stretched');
@@ -59,6 +69,8 @@ figure, imshow(gThreshed), title('Global Thresholding');
 figure, imshow(aThreshed), title('Adaptive Thresholding');
 figure, imshow(edgeDetected), title('Edge Detection');
 figure, imshow(colorSegmented), title('Color Segmentation');
+figure, imshow(roi), title('roi');
+figure, imshow(output), title('output');
 end
 
 
@@ -147,8 +159,8 @@ sobelY = [-1 -2 -1;
 blurredGray = rgb2gray(blurred);
 
 %Apply sobel filter to emphasize lines on the X and Y axis
-gradientX = conv2(blurredGray, sobelX);
-gradientY = conv2(blurredGray, sobelY);
+gradientX = conv2(blurredGray, sobelX, 'same');
+gradientY = conv2(blurredGray, sobelY, 'same');
 
 % Get the gradient magnitude of the image using use Pythagorus Thoerem
 magnitude = sqrt(gradientX.^2 + gradientY.^2);
@@ -182,7 +194,7 @@ target_angle = 0;   % Target angle will find all edges at a specified angle
 A_target_angle = canny_angles >= target_angle*pi/180 - angle_tolerance & ...
     canny_angles<= target_angle*pi/180 + angle_tolerance;
 % The output is our thinned image before hysteris or edge detection
-output = ~canny;
+output = canny;
 end
 
 
@@ -196,12 +208,13 @@ h = imageHsv(:, :, 1);
 s = imageHsv(:, :, 2);
 v = imageHsv(:, :, 3);
 
-% Segment using color
+% Segment blue color
 roi = ((h > 0.5) & (h < 0.833)) & (s > 0.5) & (v > 0.5);
 
-% Restore to RGB colored image
-output = image;
-for i = 1:3
-    output(:, :, i) = roi .* image(:, :, i);
-end
+% Remove smaller components 
+% roi = bwareaopen(roi, floor((width/20) * (height/20)));
+roi = bwareafilt(roi, 1, 'largest');
+
+% Fill the enclosed area
+output = imfill(roi, 'holes');
 end
