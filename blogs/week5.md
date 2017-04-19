@@ -18,10 +18,10 @@ Results:
 
 | Original | Result |
 | :---: | :---: |
-| ![Original](./img/week5-reg1-original.jpg) | ![Output](./img/week5-reg1-result.jpg) |
-| ![Original](./img/week5-reg2-original.jpg) | ![Output](./img/week5-reg2-result.jpg) |
-| ![Original](./img/week5-reg3-original.jpg) | ![Output](./img/week5-reg3-result.jpg) |
-| ![Original](./img/week5-reg4-original.jpg) | ![Output](./img/week5-reg4-result.jpg) |
+| ![Original](./img/week5-reg1-original.jpg) | ![Output](./img/week5-reg1-output.jpg) |
+| ![Original](./img/week5-reg2-original.jpg) | ![Output](./img/week5-reg2-output.jpg) |
+| ![Original](./img/week5-reg3-original.jpg) | ![Output](./img/week5-reg3-output.jpg) |
+| ![Original](./img/week5-reg4-original.jpg) | ![Output](./img/week5-reg4-output.jpg) |
 
          
 
