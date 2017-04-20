@@ -1,6 +1,6 @@
 **Contrast Stretching**
 ========================
-<sup>*This is a blog entry from [License Plate Object Identification Blogs](./README.md).*</sup>
+<sup>*This is a blog entry from [License Plate Object Identification Blogs](http://chenyumin.com/p/license-plate-object-detection-1-contrast-stretching).*</sup>
 
 In this week, simple contrast stretching is implemented as a image enhancement technique to improve the contrast of the image. The target image for this project actually already has pretty good contrast, but for better automation, proper normalization is needed to better generalize this solution.  
 

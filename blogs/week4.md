@@ -1,6 +1,6 @@
 **Color Segmentation**
 ========================
-<sup>*This is a blog entry from [License Plate Object Identification Blogs](./README.md).*</sup>
+<sup>*This is a blog entry from [License Plate Object Identification Blogs](http://chenyumin.com/p/license-plate-object-detection-4-color-segmentation).*</sup>
 
 This week, color segmentation is introduced in this project to separate the blue vertical band to the left of the license plate containing the 12 stars of the Flag of Europe.
 

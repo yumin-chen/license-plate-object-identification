@@ -18,15 +18,15 @@ Development
 ------------------------
 This project is divided and marked by weekly progress. [Weekly Progress Blogs](/blogs) are used to record the related research into an area of computer vision and implementation of an algorithm design in MATLAB. 
 
-[Week 1: Contrast Stretching](./blogs/week1.md)
+[Week 1: Contrast Stretching](http://chenyumin.com/p/license-plate-object-detection-1-contrast-stretching)
 
-[Week 2: Thresholding](./blogs/week2.md)
+[Week 2: Thresholding](http://chenyumin.com/p/license-plate-object-detection-2-thresholding)
 
-[Week 3: Edge Detection](./blogs/week3.md)
+[Week 3: Edge Detection](http://chenyumin.com/p/license-plate-object-detection-3-edge-detection)
 
-[Week 4: Color Segmentation](./blogs/week4.md)
+[Week 4: Color Segmentation](http://chenyumin.com/p/license-plate-object-detection-4-color-segmentation)
 
-[Week 5: Finishing Up](./blogs/week5.md)
+[Week 5: Finishing Up](http://chenyumin.com/p/license-plate-object-detection-5-finishing-up)
 
 
 Licensing
@@ -36,5 +36,5 @@ Please see the file named [LICENSE.md](LICENSE.md).
 
 Author
 ------------------------
-* Yumin Chen
+* [Chen Yumin](//www.chenyumin.com)
 * Paul Sheehan

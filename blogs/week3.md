@@ -1,6 +1,6 @@
 **Edge Detection**
 ========================
-<sup>*This is a blog entry from [License Plate Object Identification Blogs](./README.md).*</sup>
+<sup>*This is a blog entry from [License Plate Object Identification Blogs](http://chenyumin.com/p/license-plate-object-detection-3-edge-detection).*</sup>
 
 This week, our registration plate image is enhanced by introducing Edge Detection. The previously thresholded image is further transformed so that it is better suited for the detection of the licence plate.
 

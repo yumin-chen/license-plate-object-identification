@@ -1,6 +1,6 @@
 **Finishing Up**
 ========================
-<sup>*This is a blog entry from [License Plate Object Identification Blogs](./README.md).*</sup>
+<sup>*This is a blog entry from [License Plate Object Identification Blogs](http://chenyumin.com/p/license-plate-object-detection-5-finishing-up).*</sup>
 
 This project is finished.  
 

@@ -1,6 +1,6 @@
 **Thresholding**
 ========================
-<sup>*This is a blog entry from [License Plate Object Identification Blogs](./README.md).*</sup>
+<sup>*This is a blog entry from [License Plate Object Identification Blogs](http://chenyumin.com/p/license-plate-object-detection-2-thresholding).*</sup>
 
 In this week, different types of thresholding is implemented as a method of segmentation.  
 
